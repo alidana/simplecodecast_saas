@@ -1,4 +1,6 @@
 class Users::RegistrationsController < Devise::RegistrationsController
+  
+  #added this line and select plan method to pervent changing url for signing up, but it does not workink!
   before_filter :select_plan, only: :new
   
   def create
@@ -17,8 +19,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   private
     def select_plan
       unless params[:plan] && (params[:plan] == '1' || params[:plan] == '2')
-        flash[:notice] = "Please select a membership plan to sign up."
-        redirect_to root_url
+      flash[:notice] = "Please select a membership plan to sign up."
+      redirect_to root_url
     end
   end
   
